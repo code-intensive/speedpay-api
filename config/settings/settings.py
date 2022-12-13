@@ -194,13 +194,8 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "verbose",
         },
-        "file": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": PROJECT_ROOT.joinpath("logs", "error.log").as_posix(),
-        },
     },
-    "root": {"level": "INFO", "handlers": ["console", "file"]},
+    "root": {"level": "INFO", "handlers": ["console"]},
 }
 
 # CORS_URLS_REGEX = r'^/api/.*$'
