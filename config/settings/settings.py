@@ -50,7 +50,7 @@ THIRD_PARTY_APPS = [
     "rest_framework_simplejwt.token_blacklist",
 ]
 
-LOCAL_APPS = ["speedpay_auth", "speedpay_users", "speedpay_wallet"]
+LOCAL_APPS = ["speedpay_auth", "speedpay_users", "speedpay_wallets"]
 
 INSTALLED_APPS = CORE_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

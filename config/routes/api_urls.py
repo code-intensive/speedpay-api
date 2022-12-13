@@ -3,7 +3,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter, SimpleRouter
 
 from speedpay_users.api.views import SpeedPayUserViewSet
-from speedpay_wallet.api.views import SpeedPayWalletViewSet
+from speedpay_wallets.api.views import SpeedPayWalletViewSet
 
 app_name = "api"
 

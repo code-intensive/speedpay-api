@@ -1,7 +1,7 @@
 from speedpay_users.api.serializers import SpeedPayUserSerializer
 from speedpay_users.models import SpeedPayUser
-from speedpay_wallet.api.serializers import SpeedPayWalletSerializer
-from speedpay_wallet.models import SpeedPayWallet
+from speedpay_wallets.api.serializers import SpeedPayWalletSerializer
+from speedpay_wallets.models import SpeedPayWallet
 from utils import model_from_meta
 
 
