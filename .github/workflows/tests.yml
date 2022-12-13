@@ -1,0 +1,67 @@
+#main.yml
+#This workflow will install Python dependencies, lint using Black, run tests using Pytest
+
+name: speedpay-github-actions
+
+on:
+  push:
+
+  pull_request:
+    branches:
+      - main
+
+#A workflow job running sequentially
+jobs:
+  black:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: set up poetry
+        uses: Gr1N/setup-poetry@v7
+        with:
+          poetry-version: "1.2.2"
+      - name: install dependencies
+        run: poetry install --no-root
+      - name: Run black checks and format
+        run: "poetry run black . --check"
+
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: set up poetry
+        uses: Gr1N/setup-poetry@v7
+        with:
+          poetry-version: "1.2.2"
+      - name: install dependencies
+        run: poetry install --no-root
+      - name: check and format with flake8
+        run: "poetry run flake8 . --count"
+
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+      - name: set up poetry
+        uses: Gr1N/setup-poetry@v7
+        with:
+          poetry-version: "1.2.2"
+      - name: install dependencies
+        run: poetry install --no-root
+      - name: perform static type checks with mypy
+        run: "poetry run mypy ."
