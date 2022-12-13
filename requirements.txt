@@ -1,0 +1,13 @@
+djangorestframework-simplejwt
+django-cors-headers
+Django
+black
+flake8
+pytest
+drf-spectacular
+django-debug-toolbar
+python-dotenv
+debugpy
+pre-commit
+isort
+autoflake
