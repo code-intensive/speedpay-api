@@ -1,3 +1,5 @@
+from typing import Dict, Union
+
 from django.conf import settings
 from django.db.models import QuerySet
 from django.http import HttpRequest
@@ -7,6 +9,7 @@ from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from rest_framework_simplejwt import settings
 
 from speedpay.utils.model_extractor import model_from_meta
 from speedpay.wallets.api.serializers import SpeedPayWalletSerializer
@@ -75,7 +78,7 @@ class SpeedPayWalletViewSet(ListModelMixin, GenericViewSet):
         wallets = model_from_meta(self.serializer_class)
         return wallets.objects.order_by()
 
-    def _get_amount_or_fail(data: dict[str, [str | int]]) -> int | str:
+    def _get_amount_or_fail(data: Dict[str, Union[str, int]]) -> Union[int, str]:
         """
         Attempts to retrieve the amount from the provided data,
         :raises: `ValidationError` in the event of failure

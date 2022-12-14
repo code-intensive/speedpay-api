@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import Any
+from typing import Any, Tuple
 
 from django.contrib.auth import get_user_model
 from django.db import models, transaction
@@ -45,13 +45,13 @@ class SpeedPayWallet(models.Model):
         """Check if the current balace is greater than zero"""
         return Decimal(self.balance) < Decimal(1)
 
-    def inspect_withdrawal(self, amount: Any) -> tuple[bool, Decimal]:
+    def inspect_withdrawal(self, amount: Any) -> Tuple[bool, Decimal]:
         """Validates if the current withdrawal transaction is possible"""
         balance_remaining = SpeedPayWallet._mock_withdrawal(self.balance, amount)
         is_withdrawable = not (self.is_empty and balance_remaining < 0)
         return (is_withdrawable, balance_remaining)
 
-    def inspect_deposit(self, amount: Any) -> tuple[bool, Decimal]:
+    def inspect_deposit(self, amount: Any) -> Tuple[bool, Decimal]:
         """Validates if the current deposit transaction is possible"""
         new_balance = SpeedPayWallet._mock_deposit(self.balance, amount)
         limit_not_exceeded = self.MAX_BALANCE > new_balance
