@@ -12,7 +12,6 @@ djangorestframework-simplejwt = "^5.2.2"
 django-cors-headers = "^3.13.0"
 Django = "^4.1.4"
 black = "^22.12.0"
-flake8 = "^6.0.0"
 pytest = "^7.2.0"
 drf-spectacular = "^0.24.2"
 django-debug-toolbar = "^3.8.1"
@@ -21,6 +20,7 @@ debugpy = "^1.6.4"
 pre-commit = "^2.20.0"
 isort = "^5.11.1"
 autoflake = "^2.0.0"
+mysqlclient = "^2.1.1"
 
 
 [build-system]
