@@ -9,12 +9,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-BASE_DIR = Path(__file__).parent.parent.parent
+PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": PROJECT_ROOT / "db.sqlite3",
     },
     "pythonanywhere": {
         "ENGINE": "django.db.backends.mysql",
