@@ -4,12 +4,14 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
+from speedpay.authentication.permissions import IsAuthenticatedOrAnonCreate
 from speedpay.users.api.serializers import SpeedPayUserSerializer
 from speedpay.utils.model_extractor import model_from_meta
 
 
 class SpeedPayUserViewSet(ModelViewSet):
     serializer_class = SpeedPayUserSerializer
+    permission_classes = (IsAuthenticatedOrAnonCreate,)
 
     def get_queryset(self) -> QuerySet:
         speedpay_user = model_from_meta(self.serializer_class)
