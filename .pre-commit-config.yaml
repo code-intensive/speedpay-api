@@ -32,6 +32,6 @@ repos:
 
   - id: isort
     name: isort
-    entry: poetry run isort
+    entry: poetry run isort .
     language: system
     types: [python]
