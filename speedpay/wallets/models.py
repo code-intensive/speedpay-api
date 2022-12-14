@@ -48,7 +48,7 @@ class SpeedPayWallet(models.Model):
     def inspect_withdrawal(self, amount: Any) -> Tuple[bool, Decimal]:
         """Validates if the current withdrawal transaction is possible"""
         balance_remaining = SpeedPayWallet._mock_withdrawal(self.balance, amount)
-        is_withdrawable = not (self.is_empty and balance_remaining < 0)
+        is_withdrawable = (not self.is_empty) and (balance_remaining >= Decimal(0))
         return (is_withdrawable, balance_remaining)
 
     def inspect_deposit(self, amount: Any) -> Tuple[bool, Decimal]:

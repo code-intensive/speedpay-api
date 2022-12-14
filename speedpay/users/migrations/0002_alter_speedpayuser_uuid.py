@@ -6,16 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("wallets", "0001_initial"),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name="speedpaywallet",
-            name="wallet_uuid",
+            model_name="speedpayuser",
+            name="uuid",
             field=models.CharField(
                 db_index=True,
-                default="wallet_6da767dcbfef40a782252bbf46828e24",
+                default="user_d1c12d8ad1ad4ce4bb6c29e2525c1b9e",
                 max_length=80,
                 verbose_name="user uuid",
             ),

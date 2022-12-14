@@ -1,3 +1,5 @@
+from typing import Any, Dict
+
 from rest_framework.serializers import ModelSerializer
 
 from speedpay.users.models import SpeedPayUser
@@ -24,3 +26,10 @@ class SpeedPayUserSerializer(ModelSerializer):
             "id": {"read_only": True},
             "is_active": {"read_only": True},
         }
+
+    def create(self, validated_data: Dict[str, Any]) -> SpeedPayUser:
+        password = validated_data.pop("password")
+        speedpay_user = SpeedPayUser(**validated_data)
+        speedpay_user.set_password(password)
+        speedpay_user.save()
+        return speedpay_user

@@ -9,7 +9,6 @@ from rest_framework.exceptions import PermissionDenied, ValidationError
 from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-from rest_framework_simplejwt import settings
 
 from speedpay.utils.model_extractor import model_from_meta
 from speedpay.wallets.api.serializers import SpeedPayWalletSerializer
@@ -68,7 +67,7 @@ class SpeedPayWalletViewSet(ListModelMixin, GenericViewSet):
         serialized_wallet = self.get_serializer(wallet).data
         return Response(serialized_wallet)
 
-    @action(methods=("GET",), detail=True)
+    @action(methods=("GET",), detail=True, url_path="check-balance")
     def check_balance(self, request: HttpRequest, *args, **kwargs) -> Response:
         """Checks the current balance in the authenticated User's wallet"""
         wallet = self.get_object()
