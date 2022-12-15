@@ -31,7 +31,7 @@ class SpeedPayWallet(models.Model):
         default=0,
     )
     wallet_uuid = models.CharField(
-        _("user uuid"),
+        _("wallet uuid"),
         default=generate_uuid("wallet"),
         db_index=True,
         max_length=80,

@@ -32,7 +32,9 @@ DEBUG = getenv("DEBUG", False)
 
 # Since allowed hosts should hold a list of hosts, the list comprehension
 # helps to handle that, defaulting to an empty list if env key is missing
-ALLOWED_HOSTS = getenv("API_HOST", "").split(",")
+ALLOWED_HOSTS = [
+    allowed_host.strip() for allowed_host in getenv("ALLOWED_HOSTS", "").split(",")
+]
 
 # Application definition
 CORE_APPS = [

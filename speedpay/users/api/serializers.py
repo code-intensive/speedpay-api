@@ -17,11 +17,11 @@ class SpeedPayUserSerializer(ModelSerializer):
             "last_name",
             "email",
             "is_active",
-            "uuid",
+            "user_uuid",
         )
         extra_kwargs = {
             "password": {"write_only": True},
-            "uuid": {"read_only": True},
+            "user_uuid": {"read_only": True},
             "last_login": {"read_only": True},
             "id": {"read_only": True},
             "is_active": {"read_only": True},

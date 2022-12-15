@@ -9,7 +9,7 @@ class SpeedPayUser(AbstractUser):
     is_active = models.BooleanField(_("active status"), default=True)
     email = models.EmailField(_("email address"), unique=True)
     is_admin = models.BooleanField(_("admin status"), default=False)
-    uuid = models.CharField(
+    user_uuid = models.CharField(
         _("user uuid"),
         default=generate_uuid("user"),
         db_index=True,

@@ -20,5 +20,5 @@ def test_model_from_meta_assertion():
         pass
     else:
         raise AssertionError(
-            "SpeedPayUser Model is not a valid ModelSerializer subclass",
+            f"{type(SpeedPayUser)} Model is not a valid ModelSerializer subclass",
         )
