@@ -208,7 +208,7 @@ DJANGO_SETTINGS_MODULE = getenv("DJANGO_SETTINGS_MODULE", "config.settings.setti
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
-STATIC_ROOT = PROJECT_ROOT.joinpath("staticfiles").resolve().as_posix()
+STATIC_ROOT = PROJECT_ROOT.joinpath("static").resolve().as_posix()
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
