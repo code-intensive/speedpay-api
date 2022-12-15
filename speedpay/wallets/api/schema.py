@@ -131,4 +131,48 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
             ),
         ],
     ),
+    withdraw=schema_utils.extend_schema(
+        examples=[
+            schema_utils.OpenApiExample(
+                "speedpay_wallets_amount_only_request",
+                value={"amount": "984938.08"},
+                request_only=True,
+            ),
+            schema_utils.OpenApiExample(
+                "speedpay_wallets_update_request",
+                value={
+                    "id": 1939,
+                    "wallet_uuid": "wallet_88d00e8f927f449291a1654b3f7cb298",
+                    "balance": "984938.08",
+                    "is_active": True,
+                    "last_withdrawn": "2022-12-14T23:13:49.411Z",
+                    "last_deposited": "2022-08-14T03:09:49.439Z",
+                    "is_empty": False,
+                },
+                response_only=True,
+            ),
+        ],
+    ),
+    deposit=schema_utils.extend_schema(
+        examples=[
+            schema_utils.OpenApiExample(
+                "speedpay_wallets_amount_only_request",
+                value={"amount": "984938.08"},
+                request_only=True,
+            ),
+            schema_utils.OpenApiExample(
+                "speedpay_wallets_update_request",
+                value={
+                    "id": 1939,
+                    "wallet_uuid": "wallet_88d00e8f927f449291a1654b3f7cb298",
+                    "balance": "984938.08",
+                    "is_active": True,
+                    "last_withdrawn": "2022-12-14T23:13:49.411Z",
+                    "last_deposited": "2022-08-14T03:09:49.439Z",
+                    "is_empty": False,
+                },
+                response_only=True,
+            ),
+        ],
+    ),
 )
