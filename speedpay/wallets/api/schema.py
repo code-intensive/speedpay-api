@@ -55,13 +55,13 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
     ),
     retrieve=schema_utils.extend_schema(
         description=(
-            "Retrieves a `SpeedPayWallet` via their `wallet_uuid`.\n\n"
+            "Retrieves a `SpeedPayWallet` via it's `wallet_uuid`.\n\n"
             "Raises a **404** if the wallet does not exist."
         ),
     ),
     update=schema_utils.extend_schema(
         description=(
-            "Updates a `SpeedPayWallet` via their `wallet_uuid`.\n\n"
+            "Updates a `SpeedPayWallet` via it's `wallet_uuid`.\n\n"
             "Raises a **404** if the wallet does not exist.\n\n"
         ),
         examples=[
@@ -82,7 +82,7 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
     ),
     partial_update=schema_utils.extend_schema(
         description=(
-            "Partially updates a `SpeedPayWallet` via their `wallet_uuid`.\n\n"
+            "Partially updates a `SpeedPayWallet` via it's `wallet_uuid`.\n\n"
             "Raises a **404** if the wallet does not exist.\n\n"
             "Only the `is_active` field can be mutated."
         ),

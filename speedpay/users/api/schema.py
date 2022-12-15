@@ -45,13 +45,13 @@ users_viewset_schema = schema_utils.extend_schema_view(
     ),
     retrieve=schema_utils.extend_schema(
         description=(
-            "Retrieves a `SpeedPayUser` via their `id`.\n\n"
+            "Retrieves a `SpeedPayUser` via it's `id`.\n\n"
             "Raises a **404** if the user does not exist."
         ),
     ),
     update=schema_utils.extend_schema(
         description=(
-            "Updates a `SpeedPayUser` via their `id`.\n\n"
+            "Updates a `SpeedPayUser` via it's `id`.\n\n"
             "Raises a **404** if the user does not exist.\n\n"
         ),
         examples=[
@@ -68,7 +68,7 @@ users_viewset_schema = schema_utils.extend_schema_view(
     ),
     partial_update=schema_utils.extend_schema(
         description=(
-            "Partially updates a `SpeedPayUser` via their `id`.\n\n"
+            "Partially updates a `SpeedPayUser` via it's `id`.\n\n"
             "Raises a **404** if the user does not exist.\n\n"
             "`username` and `email` fields are immutable."
         ),
@@ -86,7 +86,7 @@ users_viewset_schema = schema_utils.extend_schema_view(
     ),
     destroy=schema_utils.extend_schema(
         description=(
-            "Deletes a `SpeedPayUser` via their `id`.\n\n"
+            "Deletes a `SpeedPayUser` via it's `id`.\n\n"
             "Raises a **404** if the user does not exist.\n\n"
         ),
         responses={204: None},
