@@ -1,16 +1,16 @@
 from typing import Dict, Union
 
-from django.conf import settings
 from django.db.models import QuerySet
 from django.http import HttpRequest
 from drf_spectacular.utils import OpenApiExample, extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.exceptions import PermissionDenied, ValidationError
+from rest_framework.exceptions import ValidationError
 from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
+from speedpay.authentication.permissions import IsAdminUserOrNoList
 from speedpay.core.pagination import SpeedPayWalletPaginator
 from speedpay.utils.model_extractor import model_from_meta
 from speedpay.wallets.api.serializers import SpeedPayWalletSerializer
@@ -36,6 +36,7 @@ class SpeedPayWalletViewSet(ListModelMixin, GenericViewSet):
     serializer_class = SpeedPayWalletSerializer
     lookup_field = "wallet_uuid"
     lookup_url_kwarg = "wallet_uuid"
+    permission_classes = (IsAdminUserOrNoList,)
     pagination_class = SpeedPayWalletPaginator
 
     @extend_schema(
@@ -48,22 +49,6 @@ class SpeedPayWalletViewSet(ListModelMixin, GenericViewSet):
         wallet = wallet_model.objects.create(speedpay_user=request.user)
         serialized_wallet = self.get_serializer(wallet).data
         return Response(serialized_wallet, status=status.HTTP_201_CREATED)
-
-    def list(self, request, *args, **kwargs) -> Response:
-        """
-        Retrieves a paginated list of wallets, the requesting User
-        must be an admin or a superuser.
-        """
-        if not (request.user.is_admin or request.user.is_superuser):
-            raise PermissionDenied(
-                detail=(
-                    "You do not have permission to view this resource. "
-                    "If you feel this is an error, kindly reach out "
-                    f"to {settings.ADMIN_EMAIL}"
-                ),
-                code="permission_denied",
-            )
-        return super().list(request, *args, **kwargs)
 
     @action(methods=("GET",), detail=False)
     def me(self, request: HttpRequest) -> Response:

@@ -12,16 +12,16 @@ from speedpay.utils.model_extractor import model_from_meta
 
 
 @spectacular_schema.extend_schema_view(
-    list=spectacular_schema.extend_schema(
-        description=(
-            "Retrieves a paginated list of `SpeedPayUser`s.\n\n"
-            "Default `offset` and `page_size` are 0 and 50 respectively."
-        ),
-    ),
     create=spectacular_schema.extend_schema(
         description=(
             "Registration endpoint for `SpeedPayUser`s.\n\n"
             "`first_name` and `last_name` fields are optional."
+        ),
+    ),
+    list=spectacular_schema.extend_schema(
+        description=(
+            "Retrieves a paginated list of `SpeedPayUser`s.\n\n"
+            "Default `offset` and `page_size` are 0 and 50 respectively."
         ),
     ),
     retrieve=spectacular_schema.extend_schema(
@@ -87,7 +87,7 @@ from speedpay.utils.model_extractor import model_from_meta
             request_only=True,
         ),
         spectacular_schema.OpenApiExample(
-            "speedpay_users_create_response",
+            "speedpay_users_response",
             value={
                 "id": 19478,
                 "last_login": "2022-12-15T00:22:09.805Z",
