@@ -1,8 +1,10 @@
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
+from speedpay.wallets.api.schema import wallet_serializer_schema
 from speedpay.wallets.models import SpeedPayWallet
 
 
+@wallet_serializer_schema
 class SpeedPayWalletSerializer(ModelSerializer):
     """SpeedPay Wallet Model Serializer"""
 

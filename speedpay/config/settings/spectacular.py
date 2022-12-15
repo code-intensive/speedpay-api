@@ -11,7 +11,9 @@ SPECTACULAR_SETTINGS = {
     "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAuthenticated"],
     "SERVERS": [
         {"url": "http://127.0.0.1:8000", "description": "Local Development server"},
-        # {'url': 'http://104.168.175.34:8000', 'description': 'Staging Development server'},
-        # {'url': 'https://spirit_stream.gghnigeria.org', 'description': 'Production server'},
+        {
+            "url": "https://codedivine.pythonanywhere.com",
+            "description": "Staging server",
+        },
     ],
 }

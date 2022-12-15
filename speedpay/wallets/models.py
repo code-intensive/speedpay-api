@@ -24,7 +24,7 @@ class SpeedPayWallet(models.Model):
         related_name="wallets",
     )
     balance = models.DecimalField(
-        _("wallet balance"),
+        help_text=_("The current available money in the wallet"),
         db_index=True,
         max_digits=9,
         decimal_places=2,
@@ -35,10 +35,20 @@ class SpeedPayWallet(models.Model):
         default=generate_uuid("wallet"),
         db_index=True,
         max_length=80,
+        help_text=_("A universally unique identifier for this wallet"),
     )
-    last_withdrawn = models.DateTimeField(_("time of last withdrawal"), null=True)
-    last_deposited = models.DateTimeField(_("time of last deposit"), null=True)
-    is_active = models.BooleanField(_("is active"), default=True)
+    last_withdrawn = models.DateTimeField(
+        help_text=_("Last time a withdrawal was made from this wallet"),
+        null=True,
+    )
+    last_deposited = models.DateTimeField(
+        help_text=_("Last time a deposit was made to this wallet"),
+        null=True,
+    )
+    is_active = models.BooleanField(
+        help_text=_("For implementing wallet disabling"),
+        default=True,
+    )
 
     @property
     def is_empty(self) -> bool:
@@ -89,7 +99,7 @@ class SpeedPayWallet(models.Model):
 
     @staticmethod
     def _mock_deposit(current_balance: Any, amount_requested: Any) -> Decimal:
-        """Calculates the difference between `current_balance` and `requested_amount`"""
+        """Calculates the sum of `current_balance` and `requested_amount`"""
         return Decimal(current_balance) + Decimal(amount_requested)
 
     @staticmethod

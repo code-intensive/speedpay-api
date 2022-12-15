@@ -1,7 +1,6 @@
 from speedpay.users.api.serializers import SpeedPayUserSerializer
 from speedpay.users.models import SpeedPayUser
 from speedpay.utils import model_from_meta
-from speedpay.wallets.api.serializers import SpeedPayWalletSerializer
 from speedpay.wallets.models import SpeedPayWallet
 
 
@@ -10,7 +9,7 @@ def test_model_from_meta():
 
 
 def test_model_from_metal_fails():
-    assert SpeedPayWallet is not model_from_meta(SpeedPayWalletSerializer)
+    assert SpeedPayWallet is not model_from_meta(SpeedPayUserSerializer)
 
 
 def test_model_from_meta_assertion():

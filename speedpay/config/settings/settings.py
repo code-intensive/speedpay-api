@@ -28,7 +28,7 @@ API_VERSION = "v1"
 BASE_API_ENDPOINT = f"api/{API_VERSION}"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = getenv("DEBUG", False)
+DEBUG = getenv("DEBUG", "").lower() in ["1", "true", "yes"]
 
 # Since allowed hosts should hold a list of hosts, the list comprehension
 # helps to handle that, defaulting to an empty list if env key is missing
@@ -49,7 +49,6 @@ CORE_APPS = [
 
 THIRD_PARTY_APPS = [
     "corsheaders",
-    "debug_toolbar",
     "rest_framework",
     "drf_spectacular",
     "rest_framework_simplejwt",
@@ -78,9 +77,6 @@ MIDDLEWARE = [
 
 MIDDLEWARE.insert(0, CORS_MIDDLEWARE)
 
-if DEBUG:
-    MIDDLEWARE.insert(1, "debug_toolbar.middleware.DebugToolbarMiddleware")
-
 ROOT_URLCONF = "speedpay.config.routes.urls"
 
 TEMPLATES = [
@@ -108,8 +104,6 @@ WSGI_APPLICATION = "speedpay.config.gateways.wsgi.application"
 
 ADMIN_EMAIL = "admin@speedpay.ng"
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -129,12 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
-STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -149,8 +137,6 @@ USE_I18N = True
 USE_L10N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
-LOCALE_PATHS = [PROJECT_ROOT.joinpath("locale").resolve().as_posix()]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -220,25 +206,8 @@ DJANGO_SETTINGS_MODULE = getenv("DJANGO_SETTINGS_MODULE", "config.settings.setti
 
 # STATIC
 # ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = PROJECT_ROOT.joinpath("staticfiles").resolve().as_posix()
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = [PROJECT_ROOT.joinpath("static").resolve().as_posix()]
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
-STATICFILES_FINDERS = [
-    "django.contrib.staticfiles.finders.FileSystemFinder",
-    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-]
-
-# MEDIA
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-# MEDIA_ROOT = PROJECT_ROOT.joinpath('media').resolve().as_posix()
-# https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-# MEDIA_URL = '/media/'
-
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -249,3 +218,8 @@ AUTH_USER_MODEL = "users.SpeedPayUser"
 LOGIN_REDIRECT_URL = f"/api/{API_VERSION}/docs/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = "/auth-view/login/"
+
+# Configure debug_toolbar
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
+    MIDDLEWARE.insert(1, "debug_toolbar.middleware.DebugToolbarMiddleware")

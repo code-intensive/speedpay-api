@@ -2,47 +2,27 @@ from typing import Dict, Union
 
 from django.db.models import QuerySet
 from django.http import HttpRequest
-from drf_spectacular.utils import OpenApiExample, extend_schema
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
-from rest_framework.mixins import ListModelMixin
 from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import ModelViewSet
 
 from speedpay.authentication.permissions import IsAdminUserOrNoList
 from speedpay.core.pagination import SpeedPayWalletPaginator
 from speedpay.utils.model_extractor import model_from_meta
+from speedpay.wallets.api.schema import wallet_viewset_schema
 from speedpay.wallets.api.serializers import SpeedPayWalletSerializer
 
 
-@extend_schema(
-    examples=[
-        OpenApiExample(
-            "wallets",
-            value={
-                "id": 1938,
-                "wallet_uuid": "wallet_88d00e8f927f449291a1654b3f7cb298",
-                "balance": "198279",
-                "is_active": True,
-                "last_withdrawn": "2022-12-14T23:13:49.438Z",
-                "last_deposited": "2022-12-14T23:13:49.438Z",
-                "is_empty": False,
-            },
-        ),
-    ],
-)
-class SpeedPayWalletViewSet(ListModelMixin, GenericViewSet):
+@wallet_viewset_schema
+class SpeedPayWalletViewSet(ModelViewSet):
     serializer_class = SpeedPayWalletSerializer
     lookup_field = "wallet_uuid"
     lookup_url_kwarg = "wallet_uuid"
     permission_classes = (IsAdminUserOrNoList,)
     pagination_class = SpeedPayWalletPaginator
 
-    @extend_schema(
-        request=None,
-        responses={201: SpeedPayWalletSerializer},
-    )
     def create(self, request: HttpRequest, *args, **kwargs) -> Response:
         """Creates a new wallet for the user"""
         wallet_model = model_from_meta(self.serializer_class)
@@ -85,10 +65,10 @@ class SpeedPayWalletViewSet(ListModelMixin, GenericViewSet):
         wallets = model_from_meta(self.serializer_class)
         return wallets.objects.order_by()
 
+    @staticmethod
     def _get_amount_or_fail(data: Dict[str, Union[str, int]]) -> Union[int, str]:
         """
         Attempts to retrieve the amount from the provided data,
-        :raises: `ValidationError` in the event of failure
         """
         amount = data.get("amount", None)
         if amount is None:

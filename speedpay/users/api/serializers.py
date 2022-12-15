@@ -1,10 +1,14 @@
 from typing import Any, Dict
 
+from django.contrib.auth import get_user_model
 from rest_framework.serializers import ModelSerializer
 
-from speedpay.users.models import SpeedPayUser
+from speedpay.users.api.schema import users_serializer_schema
+
+SpeedPayUser = get_user_model()
 
 
+@users_serializer_schema
 class SpeedPayUserSerializer(ModelSerializer):
     class Meta:
         model = SpeedPayUser

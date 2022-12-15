@@ -1,7 +1,7 @@
-from rest_framework import pagination
+from rest_framework.pagination import LimitOffsetPagination
 
 
-class SpeedPayWalletPaginator(pagination.LimitOffsetPagination):
+class SpeedPayWalletPaginator(LimitOffsetPagination):
     def get_paginated_response_schema(self, schema):
         return {
             "type": "object",
@@ -14,26 +14,20 @@ class SpeedPayWalletPaginator(pagination.LimitOffsetPagination):
                     "type": "string",
                     "nullable": True,
                     "format": "uri",
-                    "example": "http://api.speedpay.ng/wallets/?{offset_param}=400&{limit_param}=100".format(
-                        offset_param=self.offset_query_param,
-                        limit_param=self.limit_query_param,
-                    ),
+                    "example": f"http://api.speedpay.ng/wallets/?{self.offset_query_param}=400&{self.limit_query_param}=100",
                 },
                 "previous": {
                     "type": "string",
                     "nullable": True,
                     "format": "uri",
-                    "example": "http://api.speedpay.ng/wallets/?{offset_param}=200&{limit_param}=100".format(
-                        offset_param=self.offset_query_param,
-                        limit_param=self.limit_query_param,
-                    ),
+                    "example": f"http://api.speedpay.ng/wallets/?{self.offset_query_param}=200&{self.limit_query_param}=100",
                 },
                 "results": schema,
             },
         }
 
 
-class SpeedPayUserPaginator(pagination.LimitOffsetPagination):
+class SpeedPayUserPaginator(LimitOffsetPagination):
     def get_paginated_response_schema(self, schema):
         return {
             "type": "object",
@@ -46,19 +40,13 @@ class SpeedPayUserPaginator(pagination.LimitOffsetPagination):
                     "type": "string",
                     "nullable": True,
                     "format": "uri",
-                    "example": "http://api.speedpay.ng/users/?{offset_param}=400&{limit_param}=100".format(
-                        offset_param=self.offset_query_param,
-                        limit_param=self.limit_query_param,
-                    ),
+                    "example": f"http://api.speedpay.ng/users/?{self.offset_query_param}=400&{self.limit_query_param}=100",
                 },
                 "previous": {
                     "type": "string",
                     "nullable": True,
                     "format": "uri",
-                    "example": "http://api.speedpay.ng/users/?{offset_param}=200&{limit_param}=100".format(
-                        offset_param=self.offset_query_param,
-                        limit_param=self.limit_query_param,
-                    ),
+                    "example": f"http://api.speedpay.ng/users/?{self.offset_query_param}=200&{self.limit_query_param}=100",
                 },
                 "results": schema,
             },
