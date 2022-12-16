@@ -1,15 +1,13 @@
-from typing import Dict, Union
-
 from django.db.models import QuerySet
 from django.http import HttpRequest
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from speedpay.authentication.permissions import IsAdminUserOrNoList
 from speedpay.core.pagination import SpeedPayWalletPaginator
+from speedpay.core.validators import validate_amount
 from speedpay.utils.model_extractor import model_from_meta
 from speedpay.wallets.api.schema import wallet_viewset_schema
 from speedpay.wallets.api.serializers import SpeedPayWalletSerializer
@@ -40,7 +38,7 @@ class SpeedPayWalletViewSet(ModelViewSet):
     @action(methods=("POST",), detail=True)
     def withdraw(self, request: HttpRequest, *args, **kwargs) -> Response:
         """Makes a withdrawal from the authenticated User's wallet"""
-        amount = SpeedPayWalletViewSet._get_amount_or_fail(request.data)
+        amount = validate_amount(request.data.get("amount"))
         wallet = self.get_object()
         wallet.withdraw(amount)
         serialized_wallet = self.get_serializer(wallet).data
@@ -49,7 +47,7 @@ class SpeedPayWalletViewSet(ModelViewSet):
     @action(methods=("POST",), detail=True)
     def deposit(self, request: HttpRequest, *args, **kwargs) -> Response:
         """Makes a deposit to the authenticated User's wallet"""
-        amount = SpeedPayWalletViewSet._get_amount_or_fail(request.data)
+        amount = validate_amount(request.data.get("amount"))
         wallet = self.get_object()
         wallet.deposit(amount)
         serialized_wallet = self.get_serializer(wallet).data
@@ -64,20 +62,3 @@ class SpeedPayWalletViewSet(ModelViewSet):
     def get_queryset(self) -> QuerySet:
         wallets = model_from_meta(self.serializer_class)
         return wallets.objects.order_by()
-
-    @staticmethod
-    def _get_amount_or_fail(data: Dict[str, Union[str, int]]) -> Union[int, str]:
-        """
-        Attempts to retrieve the amount from the provided data,
-        """
-        amount = data.get("amount", None)
-        if amount is None:
-            raise ValidationError(
-                detail={"amount": ["Missing required field."]},
-            )
-        if amount < 1:
-            raise ValidationError(
-                detail={"amount": ["Amount must exceed zero."]},
-                code="invalid_amount",
-            )
-        return amount

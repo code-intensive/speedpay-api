@@ -55,18 +55,6 @@ class SpeedPayWallet(models.Model):
         """Check if the current balace is greater than zero"""
         return Decimal(self.balance) < Decimal(1)
 
-    def inspect_withdrawal(self, amount: Any) -> Tuple[bool, Decimal]:
-        """Validates if the current withdrawal transaction is possible"""
-        balance_remaining = SpeedPayWallet._mock_withdrawal(self.balance, amount)
-        is_withdrawable = (not self.is_empty) and (balance_remaining >= Decimal(0))
-        return (is_withdrawable, balance_remaining)
-
-    def inspect_deposit(self, amount: Any) -> Tuple[bool, Decimal]:
-        """Validates if the current deposit transaction is possible"""
-        new_balance = SpeedPayWallet._mock_deposit(self.balance, amount)
-        limit_not_exceeded = self.MAX_BALANCE > new_balance
-        return limit_not_exceeded, new_balance
-
     def withdraw(self, amount: Any) -> models.Model:
         """Withdraws specified amount from this wallet"""
         can_withdraw, new_balance = self.inspect_withdrawal(amount)
@@ -96,6 +84,18 @@ class SpeedPayWallet(models.Model):
             self.last_deposited = timezone.now()
             self.save(update_fields=["balance", "last_deposited"])
         self.refresh_from_db(fields=["balance", "last_deposited"])
+
+    def inspect_withdrawal(self, amount: Any) -> Tuple[bool, Decimal]:
+        """Validates if the current withdrawal transaction is possible"""
+        balance_remaining = SpeedPayWallet._mock_withdrawal(self.balance, amount)
+        is_withdrawable = (not self.is_empty) and (balance_remaining >= Decimal(0))
+        return (is_withdrawable, balance_remaining)
+
+    def inspect_deposit(self, amount: Any) -> Tuple[bool, Decimal]:
+        """Validates if the current deposit transaction is possible"""
+        new_balance = SpeedPayWallet._mock_deposit(self.balance, amount)
+        limit_not_exceeded = self.MAX_BALANCE > new_balance
+        return limit_not_exceeded, new_balance
 
     @staticmethod
     def _mock_deposit(current_balance: Any, amount_requested: Any) -> Decimal:

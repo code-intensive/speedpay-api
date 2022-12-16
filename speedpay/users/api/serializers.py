@@ -1,7 +1,8 @@
 from typing import Any, Dict
 
 from django.contrib.auth import get_user_model
-from rest_framework.serializers import ModelSerializer
+from django.contrib.auth.password_validation import validate_password
+from rest_framework import serializers
 
 from speedpay.users.api.schema import users_serializer_schema
 
@@ -9,7 +10,7 @@ SpeedPayUser = get_user_model()
 
 
 @users_serializer_schema
-class SpeedPayUserSerializer(ModelSerializer):
+class SpeedPayUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SpeedPayUser
         fields = (
@@ -24,11 +25,11 @@ class SpeedPayUserSerializer(ModelSerializer):
             "user_uuid",
         )
         extra_kwargs = {
-            "password": {"write_only": True},
             "user_uuid": {"read_only": True},
             "last_login": {"read_only": True},
             "id": {"read_only": True},
             "is_active": {"read_only": True},
+            "password": {"write_only": True, "validators": [validate_password]},
         }
 
     def create(self, validated_data: Dict[str, Any]) -> SpeedPayUser:
