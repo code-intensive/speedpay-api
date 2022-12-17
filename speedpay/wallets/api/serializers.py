@@ -40,11 +40,12 @@ class SpeedPayWalletSerializer(serializers.ModelSerializer):
         return wallet.is_empty
 
     def links(self, wallet: SpeedPayWallet) -> Dict[str, Any]:
+
         return {
             "self": {
                 "href": f"http://127.0.0.1:8000/api/v1/wallets/{wallet.wallet_uuid}/",
             },
-            "collection": {"collection": f"http://127.0.0.1:8000/api/v1/wallets"},
+            "collection": {"href": f"http://127.0.0.1:8000/api/v1/wallets"},
             "deposit": {
                 "href": f"http://127.0.0.1:8000/api/v1/wallets/{wallet.wallet_uuid}/deposit",
             },

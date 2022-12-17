@@ -1,4 +1,3 @@
-import sys
 from datetime import timedelta
 from os import getenv
 from pathlib import Path
@@ -11,11 +10,6 @@ load_dotenv()
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-APPS_DIR = PROJECT_ROOT.joinpath("speedpay")
-
-if APPS_DIR not in sys.path:
-    sys.path.insert(0, APPS_DIR)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = getenv("SECRET_KEY")
@@ -76,7 +70,7 @@ if DEBUG:
     INSTALLED_APPS.append("debug_toolbar")
     MIDDLEWARE.insert(1, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
-ROOT_URLCONF = "speedpay.config.routes.urls"
+ROOT_URLCONF = "config.routes.urls"
 
 TEMPLATES = [
     {
@@ -99,7 +93,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "speedpay.config.gateways.wsgi.application"
+WSGI_APPLICATION = "config.gateways.wsgi.application"
 
 ADMIN_EMAIL = "admin@speedpay.ng"
 
@@ -128,14 +122,14 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": PROJECT_ROOT / "db.sqlite3",
     },
-    "pythonanywhere": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": getenv("DB_NAME"),
-        "USER": getenv("DB_USER"),
-        "PASSWORD": getenv("DB_PASSWORD"),
-        "HOST": getenv("DB_HOST"),
-        "PORT": getenv("DB_PORT"),
-    },
+    # "pythonanywhere": {
+    #     "ENGINE": "django.db.backends.mysql",
+    #     "NAME": getenv("DB_NAME"),
+    #     "USER": getenv("DB_USER"),
+    #     "PASSWORD": getenv("DB_PASSWORD"),
+    #     "HOST": getenv("DB_HOST"),
+    #     "PORT": getenv("DB_PORT"),
+    # },
 }
 
 
@@ -149,7 +143,6 @@ LANGUAGE_CODE = "en-us"
 SITE_ID = 1
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-l10n
-USE_L10N = True
 USE_I18N = True
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz

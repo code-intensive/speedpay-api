@@ -19,7 +19,6 @@ class SpeedPayUserViewSet(ModelViewSet):
 
     def get_queryset(self) -> QuerySet:
         speedpay_user = model_from_meta(self.serializer_class)
-        # faster and prevents any sort of ordering
         return speedpay_user.objects.order_by()
 
     @action(methods=("GET",), detail=False)

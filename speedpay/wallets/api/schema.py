@@ -12,6 +12,21 @@ wallet_serializer_schema = schema_utils.extend_schema_serializer(
                 "last_withdrawn": "2022-12-14T23:13:49.438Z",
                 "last_deposited": "2022-12-14T23:13:49.438Z",
                 "is_empty": False,
+                "_links": {
+                    "self": {
+                        "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/",
+                    },
+                    "collection": {"href": f"https://www.speepay.ng/api/v1/wallets"},
+                    "deposit": {
+                        "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/deposit",
+                    },
+                    "withdraw": {
+                        "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/withdraw/",
+                    },
+                    "balance": {
+                        "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/check-balance/",
+                    },
+                },
             },
         ),
     ],
@@ -38,6 +53,23 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
                         "last_withdrawn": "2022-10-14T20:13:31.408Z",
                         "last_deposited": "2022-12-14T23:21:43.438Z",
                         "is_empty": False,
+                        "_links": {
+                            "self": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/",
+                            },
+                            "collection": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets",
+                            },
+                            "deposit": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/deposit",
+                            },
+                            "withdraw": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/withdraw/",
+                            },
+                            "balance": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/check-balance/",
+                            },
+                        },
                     },
                     {
                         "id": 1939,
@@ -47,6 +79,23 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
                         "last_withdrawn": "2022-12-14T23:13:49.411Z",
                         "last_deposited": "2022-08-14T03:09:49.439Z",
                         "is_empty": True,
+                        "_links": {
+                            "self": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/",
+                            },
+                            "collection": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets",
+                            },
+                            "deposit": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/deposit",
+                            },
+                            "withdraw": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/withdraw/",
+                            },
+                            "balance": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/check-balance/",
+                            },
+                        },
                     },
                 ],
                 response_only=True,
@@ -75,6 +124,23 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
                     "last_withdrawn": "2022-12-14T23:13:49.411Z",
                     "last_deposited": "2022-08-14T03:09:49.439Z",
                     "is_empty": True,
+                    "_links": {
+                        "self": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/",
+                        },
+                        "collection": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets",
+                        },
+                        "deposit": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/deposit",
+                        },
+                        "withdraw": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/withdraw/",
+                        },
+                        "balance": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/check-balance/",
+                        },
+                    },
                 },
                 request_only=True,
             ),
@@ -116,6 +182,23 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
                         "last_withdrawn": "2022-10-14T20:13:31.408Z",
                         "last_deposited": "2022-12-14T23:21:43.438Z",
                         "is_empty": False,
+                        "_links": {
+                            "self": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/",
+                            },
+                            "collection": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets",
+                            },
+                            "deposit": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/deposit",
+                            },
+                            "withdraw": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/withdraw/",
+                            },
+                            "balance": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/check-balance/",
+                            },
+                        },
                     },
                     {
                         "id": 1939,
@@ -125,6 +208,23 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
                         "last_withdrawn": "2022-12-14T23:13:49.411Z",
                         "last_deposited": "2022-08-14T03:09:49.439Z",
                         "is_empty": True,
+                        "_links": {
+                            "self": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/",
+                            },
+                            "collection": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets",
+                            },
+                            "deposit": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/deposit",
+                            },
+                            "withdraw": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/withdraw/",
+                            },
+                            "balance": {
+                                "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/check-balance/",
+                            },
+                        },
                     },
                 ],
                 response_only=True,
@@ -148,6 +248,23 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
                     "last_withdrawn": "2022-12-14T23:13:49.411Z",
                     "last_deposited": "2022-08-14T03:09:49.439Z",
                     "is_empty": False,
+                    "_links": {
+                        "self": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/",
+                        },
+                        "collection": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets",
+                        },
+                        "deposit": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/deposit",
+                        },
+                        "withdraw": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/withdraw/",
+                        },
+                        "balance": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/check-balance/",
+                        },
+                    },
                 },
                 response_only=True,
             ),
@@ -170,6 +287,23 @@ wallet_viewset_schema = schema_utils.extend_schema_view(
                     "last_withdrawn": "2022-12-14T23:13:49.411Z",
                     "last_deposited": "2022-08-14T03:09:49.439Z",
                     "is_empty": False,
+                    "_links": {
+                        "self": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/",
+                        },
+                        "collection": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets",
+                        },
+                        "deposit": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/deposit",
+                        },
+                        "withdraw": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/withdraw/",
+                        },
+                        "balance": {
+                            "href": f"https://www.speepay.ng/api/v1/wallets/wallet_f10b6275af584c78b9dc982400a94a67/check-balance/",
+                        },
+                    },
                 },
                 response_only=True,
             ),

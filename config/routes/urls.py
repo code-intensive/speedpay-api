@@ -18,7 +18,7 @@ urlpatterns = [
     ),
     path(settings.ADMIN_URL, admin.site.urls),
     # Business layer API urls
-    path("", include("speedpay.config.routes.api_urls")),
+    path("", include("config.routes.api_urls")),
     # Default auth views from rest framework for session based sign in
     path("auth-view/", include("rest_framework.urls")),
     # Simple JWT authentication endpoints

@@ -15,3 +15,9 @@ class SpeedPayUser(AbstractUser):
         db_index=True,
         max_length=80,
     )
+
+    def __str__(self):
+        return self.user_name
+
+    def __repr__(self) -> str:
+        return f"<{self.username} - {self.email}"
